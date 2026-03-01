@@ -1,0 +1,5 @@
+{
+  "name": "Gradient Blinds Demo",
+  "description": "A demo of the Gradient Blinds component from React Bits Pro using OGL for WebGL rendering.",
+  "requestFramePermissions": []
+}
