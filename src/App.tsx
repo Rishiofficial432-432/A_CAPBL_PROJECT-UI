@@ -5,12 +5,13 @@
 
 import GradientBlinds from './components/GradientBlinds';
 import CurvedNavbar from './components/CurvedNavbar';
+import { GlobeDemo } from './components/GlobeDemo';
 
 export default function App() {
   return (
-    <div className="w-full h-screen bg-black flex items-center justify-center relative overflow-hidden">
+    <div className="w-full min-h-screen bg-black flex flex-col items-center relative overflow-x-hidden">
       <CurvedNavbar />
-      <div className="absolute inset-0 z-0">
+      <div className="fixed inset-0 z-0">
         <GradientBlinds
           gradientColors={['#FF9FFC', '#5227FF', '#FF2773']}
           angle={45}
@@ -27,7 +28,7 @@ export default function App() {
         />
       </div>
       
-      <div className="relative z-10 text-center p-8 w-full max-w-full">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full max-w-full p-8 pt-32">
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap">
           PROJECT VANGARD
         </h1>
@@ -35,9 +36,11 @@ export default function App() {
           A CAPBL PROJECT
         </p>
         
-        <button className="mt-8 px-6 py-2 border border-white text-white text-sm tracking-widest hover:bg-white hover:text-black transition-colors uppercase cursor-pointer bg-transparent mix-blend-overlay">
+        <button className="mt-8 px-6 py-2 border border-white text-white text-sm tracking-widest hover:bg-white hover:text-black transition-colors uppercase cursor-pointer bg-transparent mix-blend-overlay mb-12">
           Enter
         </button>
+
+        <GlobeDemo />
       </div>
     </div>
   );
