@@ -28,15 +28,15 @@ export default function App() {
         />
       </div>
       
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full max-w-full p-8 pt-32">
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full max-w-full p-8 pt-32 pointer-events-none">
+        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap pointer-events-auto select-none">
           PROJECT VANGARD
         </h1>
-        <p className="text-xl text-white/80 font-light tracking-wide mix-blend-overlay">
+        <p className="text-xl text-white/80 font-light tracking-wide mix-blend-overlay pointer-events-auto select-none">
           A CAPBL PROJECT
         </p>
         
-        <button className="mt-8 px-6 py-2 border border-white text-white text-sm tracking-widest hover:bg-white hover:text-black transition-colors uppercase cursor-pointer bg-transparent mix-blend-overlay mb-12">
+        <button className="mt-8 px-6 py-2 border border-white text-white text-sm tracking-widest hover:bg-white hover:text-black transition-colors uppercase cursor-pointer bg-transparent mix-blend-overlay mb-12 pointer-events-auto">
           Enter
         </button>
 
