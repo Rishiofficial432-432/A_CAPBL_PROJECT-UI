@@ -29,7 +29,7 @@ export default function App() {
       </div>
       
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full max-w-full p-8 pt-32 pointer-events-none">
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap pointer-events-auto select-none">
+        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap pointer-events-auto select-none mt-24">
           PROJECT VANGARD
         </h1>
         <p className="text-xl text-white/80 font-light tracking-wide mix-blend-overlay pointer-events-auto select-none">
