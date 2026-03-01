@@ -8,6 +8,7 @@ import CurvedNavbar from './components/CurvedNavbar';
 import { GlobeDemo } from './components/GlobeDemo';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef } from 'react';
+import { OrbitingCirclesDemo } from './components/OrbitingCirclesDemo';
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export default function App() {
@@ -31,10 +32,13 @@ export default function App() {
   const globeY = useTransform(scrollYProgress, [0, 0.45], [0, -600]);
   
   // Text animations:
-  // 0.4 -> 0.55: Fades in right in the center
-  // Starts appearing just before globe is completely gone
-  const textOpacity = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
-  const textScale = useTransform(scrollYProgress, [0.4, 0.55], [0.8, 1]);
+  // 0.35 -> 0.5: Fades in right in the center
+  // Starts appearing earlier as globe fades out
+  const textOpacity = useTransform(scrollYProgress, [0.35, 0.5], [0, 1]);
+  const textScale = useTransform(scrollYProgress, [0.35, 0.5], [0.8, 1]);
+  
+  // Only enable pointer events when text is visible
+  const textPointerEvents = useTransform(textOpacity, (opacity) => opacity > 0.1 ? 'auto' : 'none');
 
   return (
     <div ref={containerRef} className="w-full min-h-[300vh] bg-black flex flex-col items-center relative overflow-x-hidden md:cursor-none">
@@ -77,7 +81,7 @@ export default function App() {
             opacity: globeOpacity,
             y: globeY
           }}
-          className="mt-8 md:mt-12 absolute top-[35vh] md:top-[40vh] w-full flex justify-center"
+          className="mt-8 md:mt-12 absolute top-[45vh] md:top-[40vh] w-full flex justify-center"
         >
           <GlobeDemo />
         </motion.div>
@@ -85,19 +89,23 @@ export default function App() {
         <motion.div 
           style={{ 
             opacity: textOpacity, 
-            scale: textScale
+            scale: textScale,
+            pointerEvents: textPointerEvents
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl text-center pointer-events-auto px-4 md:px-6 flex flex-col items-center gap-6 md:gap-8"
+          className="absolute top-[100vh] left-0 w-full text-center px-4 md:px-6 flex flex-col items-center gap-3 md:gap-5 z-50 pb-24"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-tight drop-shadow-2xl">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-none drop-shadow-2xl mt-24">
             Your Intelligent Career Agent
           </h2>
-          <div className="w-16 md:w-24 h-1 bg-white/50 rounded-full" />
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-light max-w-2xl drop-shadow-lg">
-            Vangard takes your details and autonomously scouts opportunities across platforms like <span className="font-semibold text-white">Indeed</span> and <span className="font-semibold text-white">LinkedIn</span>.
+          <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-snug font-light max-w-2xl drop-shadow-lg">
+            Vangard takes your details and autonomously scouts opportunities across the entire digital landscape, connecting you with elite roles tailored to your potential.
             <br/><br/>
             Stop searching. Start working.
           </p>
+          
+          <div className="w-full max-w-lg mt-24">
+            <OrbitingCirclesDemo />
+          </div>
         </motion.div>
       </div>
     </div>
