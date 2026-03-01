@@ -4,10 +4,12 @@
  */
 
 import GradientBlinds from './components/GradientBlinds';
+import CurvedNavbar from './components/CurvedNavbar';
 
 export default function App() {
   return (
     <div className="w-full h-screen bg-black flex items-center justify-center relative overflow-hidden">
+      <CurvedNavbar />
       <div className="absolute inset-0 z-0">
         <GradientBlinds
           gradientColors={['#FF9FFC', '#5227FF', '#FF2773']}
