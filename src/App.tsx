@@ -6,10 +6,22 @@
 import GradientBlinds from './components/GradientBlinds';
 import CurvedNavbar from './components/CurvedNavbar';
 import { GlobeDemo } from './components/GlobeDemo';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
 
 export default function App() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const globeScale = useTransform(scrollYProgress, [0, 1], [1, 2.5]);
+  const globeOpacity = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
+  const globeY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   return (
-    <div className="w-full min-h-screen bg-black flex flex-col items-center relative overflow-x-hidden">
+    <div ref={containerRef} className="w-full min-h-[200vh] bg-black flex flex-col items-center relative overflow-x-hidden">
       <CurvedNavbar />
       <div className="fixed inset-0 z-0">
         <GradientBlinds
@@ -28,7 +40,7 @@ export default function App() {
         />
       </div>
       
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full max-w-full p-8 pt-32 pointer-events-none">
+      <div className="relative z-10 flex flex-col items-center justify-start w-full max-w-full p-8 pt-32 pointer-events-none h-screen sticky top-0">
         <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap pointer-events-auto select-none mt-24">
           PROJECT VANGARD
         </h1>
@@ -40,7 +52,16 @@ export default function App() {
           Enter
         </button>
 
-        <GlobeDemo />
+        <motion.div 
+          style={{ 
+            scale: globeScale,
+            opacity: globeOpacity,
+            y: globeY
+          }}
+          className="mt-12"
+        >
+          <GlobeDemo />
+        </motion.div>
       </div>
     </div>
   );
