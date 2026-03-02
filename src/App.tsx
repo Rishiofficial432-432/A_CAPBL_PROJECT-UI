@@ -129,18 +129,13 @@ export default function App() {
             </div>
           </div>
 
-          {/* Stats Bar - Centered Below */}
-          <div className="w-full mt-16 md:mt-24 flex justify-center">
-            <StatsBar />
-          </div>
-
           {/* Tech Stack Loop */}
-          <div className="w-full mt-24 flex flex-col items-center gap-8">
-            <h3 className="text-2xl md:text-3xl font-light text-white/80 tracking-wide uppercase text-center">
+          <div className="w-screen mt-24 flex flex-col items-center gap-8">
+            <h3 className="text-2xl md:text-3xl font-light text-white/80 tracking-wide uppercase text-center px-4">
               Job and opportunity for each skill
             </h3>
             
-            <div className="w-full max-w-5xl h-[100px] relative overflow-hidden mask-gradient">
+            <div className="w-full h-[100px] relative overflow-hidden mask-gradient">
               <LogoLoop
                 logos={techLogos}
                 speed={30}
@@ -153,6 +148,11 @@ export default function App() {
                 ariaLabel="Technology partners"
               />
             </div>
+          </div>
+
+          {/* Stats Bar - Centered Below */}
+          <div className="w-full mt-16 md:mt-24 flex justify-center">
+            <StatsBar />
           </div>
         </motion.div>
       </div>
