@@ -10,6 +10,7 @@ import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef } from 'react';
 import { OrbitingCirclesDemo } from './components/OrbitingCirclesDemo';
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
+import StatsBar from './components/StatsBar';
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -92,19 +93,30 @@ export default function App() {
             scale: textScale,
             pointerEvents: textPointerEvents
           }}
-          className="absolute top-[100vh] left-0 w-full text-center px-4 md:px-6 flex flex-col items-center gap-3 md:gap-5 z-50 pb-24"
+          className="absolute top-[100vh] left-0 w-full px-4 md:px-12 flex flex-col items-center z-50 pb-24"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-none drop-shadow-2xl mt-24">
-            Your Intelligent Career Agent
-          </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-snug font-light max-w-2xl drop-shadow-lg">
-            Vangard takes your details and autonomously scouts opportunities across the entire digital landscape, connecting you with elite roles tailored to your potential.
-            <br/><br/>
-            Stop searching. Start working.
-          </p>
-          
-          <div className="w-full max-w-lg mt-24">
-            <OrbitingCirclesDemo />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 w-full">
+            {/* Orbiting Circles - Left on Desktop */}
+            <div className="w-full max-w-lg mt-12 md:mt-0 order-2 md:order-1 flex justify-center md:justify-end">
+              <OrbitingCirclesDemo />
+            </div>
+
+            {/* Text Content - Right on Desktop */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl order-1 md:order-2">
+              <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white tracking-tight leading-none drop-shadow-2xl">
+                Your Intelligent Career Agent
+              </h2>
+              <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-snug font-light drop-shadow-lg mt-6">
+                Vangard takes your details and autonomously scouts opportunities across the entire digital landscape, connecting you with elite roles tailored to your potential.
+                <br/><br/>
+                Stop searching. Start working.
+              </p>
+            </div>
+          </div>
+
+          {/* Stats Bar - Centered Below */}
+          <div className="w-full mt-16 md:mt-24 flex justify-center">
+            <StatsBar />
           </div>
         </motion.div>
       </div>
