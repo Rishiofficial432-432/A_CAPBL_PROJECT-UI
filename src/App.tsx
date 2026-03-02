@@ -11,6 +11,21 @@ import { useRef } from 'react';
 import { OrbitingCirclesDemo } from './components/OrbitingCirclesDemo';
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import StatsBar from './components/StatsBar';
+import LogoLoop from './components/LogoLoop';
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiPython, SiRust, SiGo, SiDocker, SiKubernetes } from 'react-icons/si';
+
+const techLogos = [
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
+  { node: <SiPython />, title: "Python", href: "https://www.python.org" },
+  { node: <SiRust />, title: "Rust", href: "https://www.rust-lang.org" },
+  { node: <SiGo />, title: "Go", href: "https://go.dev" },
+  { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
+  { node: <SiKubernetes />, title: "Kubernetes", href: "https://kubernetes.io" },
+];
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -117,6 +132,27 @@ export default function App() {
           {/* Stats Bar - Centered Below */}
           <div className="w-full mt-16 md:mt-24 flex justify-center">
             <StatsBar />
+          </div>
+
+          {/* Tech Stack Loop */}
+          <div className="w-full mt-24 flex flex-col items-center gap-8">
+            <h3 className="text-2xl md:text-3xl font-light text-white/80 tracking-wide uppercase text-center">
+              Job and opportunity for each skill
+            </h3>
+            
+            <div className="w-full max-w-5xl h-[100px] relative overflow-hidden mask-gradient">
+              <LogoLoop
+                logos={techLogos}
+                speed={30}
+                direction="left"
+                logoHeight={50}
+                gap={60}
+                hoverSpeed={0}
+                scaleOnHover
+                fadeOut={false}
+                ariaLabel="Technology partners"
+              />
+            </div>
           </div>
         </motion.div>
       </div>
