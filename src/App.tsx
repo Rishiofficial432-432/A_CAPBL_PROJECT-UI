@@ -47,21 +47,18 @@ export default function App() {
   const globeOpacity = useTransform(scrollYProgress, [0, 0.2, 0.45], [0.5, 1, 0]);
   const globeY = useTransform(scrollYProgress, [0, 0.45], [0, -600]);
   
-  // Text animations:
-  // 0.35 -> 0.5: Fades in right in the center
-  // Starts appearing earlier as globe fades out
-  const textOpacity = useTransform(scrollYProgress, [0.35, 0.5], [0, 1]);
-  const textScale = useTransform(scrollYProgress, [0.35, 0.5], [0.8, 1]);
-  
-  // Only enable pointer events when text is visible
-  const textPointerEvents = useTransform(textOpacity, (opacity) => opacity > 0.1 ? 'auto' : 'none');
+  // Title animations
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
 
   return (
-    <div ref={containerRef} className="w-full min-h-[300vh] bg-black flex flex-col items-center relative overflow-x-hidden md:cursor-none">
+    <div ref={containerRef} className="w-full bg-black relative overflow-x-hidden md:cursor-none">
       <div className="hidden md:block">
         <SmoothCursor />
       </div>
       <CurvedNavbar />
+      
+      {/* Fixed Background Layer */}
       <div className="fixed inset-0 z-0">
         <GradientBlinds
           gradientColors={['#FF9FFC', '#5227FF', '#FF2773']}
@@ -79,17 +76,23 @@ export default function App() {
         />
       </div>
       
-      <div className="relative z-10 flex flex-col items-center justify-start w-full max-w-full p-4 pt-24 md:p-8 md:pt-32 pointer-events-none h-screen sticky top-0">
-        <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-white mb-4 md:mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap pointer-events-auto select-none mt-12 md:mt-24">
-          PROJECT VANGARD
-        </h1>
-        <p className="text-lg md:text-xl text-white/80 font-light tracking-wide mix-blend-overlay pointer-events-auto select-none text-center">
-          A CAPBL PROJECT
-        </p>
-        
-        <button className="mt-6 md:mt-8 px-6 py-2 border border-white text-white text-sm tracking-widest hover:bg-white hover:text-black transition-colors uppercase cursor-pointer bg-transparent mix-blend-overlay mb-8 md:mb-12 pointer-events-auto">
-          Enter
-        </button>
+      {/* Fixed Title and Globe Layer */}
+      <div className="fixed inset-0 z-10 flex flex-col items-center justify-start w-full max-w-full p-4 pt-24 md:p-8 md:pt-32 pointer-events-none h-screen">
+        <motion.div 
+          style={{ opacity: titleOpacity, y: titleY }}
+          className="flex flex-col items-center w-full"
+        >
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-white mb-4 md:mb-6 tracking-tighter mix-blend-overlay whitespace-nowrap pointer-events-auto select-none mt-12 md:mt-24">
+            PROJECT VANGARD
+          </h1>
+          <p className="text-lg md:text-xl text-white/80 font-light tracking-wide mix-blend-overlay pointer-events-auto select-none text-center">
+            A CAPBL PROJECT
+          </p>
+          
+          <button className="mt-6 md:mt-8 px-6 py-2 border border-white text-white text-sm tracking-widest hover:bg-white hover:text-black transition-colors uppercase cursor-pointer bg-transparent mix-blend-overlay mb-8 md:mb-12 pointer-events-auto">
+            Enter
+          </button>
+        </motion.div>
 
         <motion.div 
           style={{ 
@@ -101,16 +104,16 @@ export default function App() {
         >
           <GlobeDemo />
         </motion.div>
+      </div>
 
-        <motion.div 
-          style={{ 
-            opacity: textOpacity, 
-            scale: textScale,
-            pointerEvents: textPointerEvents
-          }}
-          className="absolute top-[100vh] left-0 w-full px-4 md:px-12 flex flex-col items-center z-50 pb-24"
-        >
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 w-full">
+      {/* Scrollable Content Layer */}
+      <div className="relative z-20 flex flex-col w-full">
+        {/* Spacer for the first screen (Globe view) */}
+        <div className="h-screen w-full pointer-events-none"></div>
+
+        {/* The Content Section */}
+        <div className="w-full flex flex-col items-center pb-24 pt-24">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 w-full px-4 md:px-12">
             {/* Orbiting Circles - Left on Desktop */}
             <div className="w-full max-w-lg mt-12 md:mt-0 order-2 md:order-1 flex justify-center md:justify-end">
               <OrbitingCirclesDemo />
@@ -151,10 +154,10 @@ export default function App() {
           </div>
 
           {/* Stats Bar - Centered Below */}
-          <div className="w-full mt-16 md:mt-24 flex justify-center">
+          <div className="w-full mt-16 md:mt-24 flex justify-center px-4">
             <StatsBar />
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
